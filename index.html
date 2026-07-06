@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دردشة الذكاء الاصطناعي في سوريا</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050816; color: white; font-family: Arial, sans-serif; }
+        .chat-box { height: 400px; overflow-y: auto; }
+    </style>
+</head>
+<body class="p-4">
+    <div id="app" class="max-w-2xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-6">دردشة الذكاء الاصطناعي في سوريا 🇸🇾</h1>
+        
+        <!-- Login Screen -->
+        <div id="login-screen" class="bg-gray-800 p-6 rounded-xl">
+            <input id="username" type="text" placeholder="اسم المستخدم" class="w-full p-3 mb-3 bg-gray-700 rounded text-white">
+            <input id="password" type="password" placeholder="كلمة المرور" class="w-full p-3 mb-3 bg-gray-700 rounded text-white">
+            <button onclick="login()" class="w-full p-3 bg-emerald-500 rounded font-bold">دخول</button>
+        </div>
+
+        <!-- Chat Screen -->
+        <div id="chat-screen" class="hidden">
+            <div id="chat-box" class="chat-box bg-gray-900 p-4 rounded-xl mb-4 border border-gray-700"></div>
+            <div class="flex gap-2">
+                <input id="user-input" type="text" placeholder="اكتب سؤالك..." class="flex-1 p-3 bg-gray-800 rounded text-white">
+                <button onclick="sendMessage()" class="p-3 bg-emerald-600 rounded">إرسال</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            if (user === 'joker' && pass === 'admin123') {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('chat-screen').classList.remove('hidden');
+            } else {
+                alert('خطأ في بيانات الدخول');
+            }
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const chatBox = document.getElementById('chat-box');
+            const msg = input.value;
+            if (!msg) return;
+
+            chatBox.innerHTML += `<div class="mb-2 text-right text-blue-300">أنت: ${msg}</div>`;
+            input.value = '';
+
+            // محاكاة التفكير والرد
+            chatBox.innerHTML += `<div class="mb-2 text-left text-emerald-400">يفكر...</div>`;
+            setTimeout(() => {
+                chatBox.lastElementChild.remove();
+                chatBox.innerHTML += `<div class="mb-2 text-left text-emerald-400">AI: إجابة ذكية حول "${msg}"، سأقوم بتحليلها فوراً... (المحرك الداخلي نشط)</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
